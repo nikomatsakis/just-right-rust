@@ -1,6 +1,6 @@
 name = "just-right-rust"
 depends-on = ["*"]
-predicates = ["shell(find . -type f -name '*.rs' -print -quit | grep -q .)"]
+# predicates = ["shell(find . -type f -name '*.rs' -print -quit | grep -q .)"]
 
 [[skills]]
 source.git = "https://github.com/google/rust-skills/tree/main/unsafe_rust_review"
