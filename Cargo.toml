@@ -8,6 +8,7 @@ license = "MIT OR Apache-2.0"
 readme = "README.md"
 keywords = ["rust", "async", "unsafe", "symposium", "coding-agents"]
 categories = ["development-tools"]
+author = "Niko Matsakis"
 
 [dependencies]
 symposium-sdk = "0.1"
