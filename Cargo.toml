@@ -1,0 +1,7 @@
+[package]
+name = "just-right-rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+symposium-sdk = "0.1"

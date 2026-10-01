@@ -1,0 +1,40 @@
+name = "just-right-rust"
+depends-on = ["*"]
+predicates = ["shell(find . -type f -name '*.rs' -print -quit | grep -q .)"]
+
+[[skills]]
+source.git = "https://github.com/google/rust-skills/tree/main/unsafe_rust_review"
+
+[[skills]]
+source.path = "skills"
+
+[[installations]]
+name = "just-right-rust-hooks"
+source = "cargo"
+crate = "just-right-rust"
+executable = "just-right-rust"
+
+[[hooks]]
+name = "just-right-rust-pre-tool-use"
+event = "PreToolUse"
+command = "just-right-rust-hooks"
+
+[[hooks]]
+name = "just-right-rust-post-tool-use"
+event = "PostToolUse"
+command = "just-right-rust-hooks"
+
+[[hooks]]
+name = "just-right-rust-user-prompt-submit"
+event = "UserPromptSubmit"
+command = "just-right-rust-hooks"
+
+[[hooks]]
+name = "just-right-rust-session-start"
+event = "SessionStart"
+command = "just-right-rust-hooks"
+
+[[hooks]]
+name = "just-right-rust-stop"
+event = "Stop"
+command = "just-right-rust-hooks"
