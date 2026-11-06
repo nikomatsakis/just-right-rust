@@ -1,0 +1,78 @@
+name: LLM-written Rust
+description: Show Rust an LLM wrote, what it should have written, and why
+labels: ["llm-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reports become rules in the Just Right Rust skills that agents load. One pattern per issue. If it is already reported, add your case as a comment instead.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong with it
+      multiple: true
+      options:
+        - Incorrect (bug, panic, race, UB)
+        - Not idiomatic
+        - More complex than needed
+        - Outdated API or crate
+        - Performance
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: generated
+    attributes:
+      label: What the LLM wrote
+      description: The smallest snippet that shows the problem. No need for ``` fences.
+      render: rust
+      placeholder: |
+        fn count_words(text: &String) -> usize {
+            text.split(" ").collect::<Vec<_>>().len()
+        }
+    validations:
+      required: true
+  - type: textarea
+    id: better
+    attributes:
+      label: What it should have written
+      render: rust
+      placeholder: |
+        fn count_words(text: &str) -> usize {
+            text.split_whitespace().count()
+        }
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it is better
+      description: What goes wrong with the first version, or what the second one buys you.
+      placeholder: |
+        `split(" ")` counts empty strings between repeated spaces, and collecting into a `Vec` just to count allocates for nothing. `&str` also accepts literals and slices.
+    validations:
+      required: true
+  - type: input
+    id: rule
+    attributes:
+      label: The rule, in one sentence
+      description: How you would tell an agent to avoid this.
+      placeholder: Take `&str`, not `&String`, for borrowed string parameters.
+  - type: textarea
+    id: exceptions
+    attributes:
+      label: When the rule does not apply
+      description: Cases where the first version is fine.
+  - type: textarea
+    id: context
+    attributes:
+      label: How it happened
+      description: The prompt or task, and the agent and model.
+      placeholder: |
+        Prompt: "add a function that counts the words in a file"
+        Agent and model: Claude Code, Claude Sonnet 4.5
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Clippy lints, API guidelines, docs or posts that back this up.
